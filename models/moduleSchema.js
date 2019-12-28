@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 
 const moduleSchema = mongoose.Schema({
   _id: mongoose.Schema.ObjectId,
+  objType: {
+    type: String,
+    default: 'modules'
+  },
   title: String,
   level: Number,
   imgUrl: {

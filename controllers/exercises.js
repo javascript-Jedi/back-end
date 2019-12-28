@@ -2,15 +2,20 @@ const exerciseSchema = require('../models/exerciseSchema')
 const mongoose = require('mongoose') 
 
 exports.all = (req, res) => {
-  exerciseSchema.find({})
-    .then( data => {
-      res.send(data)
-    })
-    .catch( err => console.log(err))
+  exerciseSchema
+  .find({})
+  .exec((err, doc)=> {
+    if (err) {
+      console.log(err)
+      return res.sendStatus(500)
+    }
+    res.send(doc)
+  })
 }
 
 exports.courseById = (req, res) => {
-  exerciseSchema.findById(req.params.id, (err, doc) => {
+  exerciseSchema.findById(req.params.id)
+  .exec((err, doc) => {
     if (err) {
       console.log(err)
       return res.sendStatus(500)

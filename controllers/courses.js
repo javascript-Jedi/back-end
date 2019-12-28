@@ -4,14 +4,21 @@ const mongoose = require('mongoose')
 exports.all = (req, res) => {
   courseSchema
   .find({})
-    .then( data => {
-      res.send(data)
-    })
-    .catch( err => console.log(err))
+  .populate('modules')
+  .exec((err, doc)=> {
+    if (err) {
+      console.log(err)
+      return res.sendStatus(500)
+    }
+    res.send(doc)
+  })
 }
 
 exports.courseById = (req, res) => {
-  courseSchema.findById(req.params.id, (err, doc) => {
+  courseSchema
+  .findById(req.params.id)
+  .populate('modules')
+  .exec((err, doc) => {
     if (err) {
       console.log(err)
       return res.sendStatus(500)

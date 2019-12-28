@@ -2,15 +2,23 @@ const lessonSchema = require('../models/lessonSchema')
 const mongoose = require('mongoose') 
 
 exports.all = (req, res) => {
-  lessonSchema.find({})
-    .then( data => {
-      res.send(data)
-    })
-    .catch( err => console.log(err))
+  lessonSchema
+  .find({})
+  .populate('parts')
+  .exec((err, doc)=> {
+    if (err) {
+      console.log(err)
+      return res.sendStatus(500)
+    }
+    res.send(doc)
+  })
 }
 
 exports.lessonById = (req, res) => {
-  lessonSchema.findById(req.params.id, (err, doc) => {
+  lessonSchema
+  .findById(req.params.id)
+  .populate('parts')
+  .exec((err, doc)=> {
     if (err) {
       console.log(err)
       return res.sendStatus(500)

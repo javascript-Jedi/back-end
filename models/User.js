@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const autoIncrement = require('mongoose-auto-increment');
 
-const connection = mongoose.createConnection("mongodb+srv://antondexy:1gdy54ff@cluster0-comih.mongodb.net/myapi");
+const connection = mongoose.createConnection("mongodb+srv://antondexy:1gdy54ff@cluster0-comih.mongodb.net/myapi",{ useUnifiedTopology: true, useNewUrlParser: true });
 
 autoIncrement.initialize(connection);
 

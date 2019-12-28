@@ -5,8 +5,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose') 
-const url = 'mongodb+srv://podolyananton:1gdy54ff@cluster0-lxjkk.mongodb.net/test?retryWrites=true&w=majority'
-// const url = 'mongodb+srv://antondexy:1gdy54ff@cluster0-comih.mongodb.net/myapi'
+const url = 'mongodb+srv://podolyananton:1gdy54ff@cluster0-lxjkk.mongodb.net/easyIT?retryWrites=true&w=majority'
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 let port = process.env.PORT || 5001

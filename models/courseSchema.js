@@ -2,14 +2,18 @@ const mongoose = require('mongoose')
 
 const coursesSchema = mongoose.Schema({
   _id: mongoose.Schema.ObjectId,
+  objType: {
+    type: String,
+    default: 'courses'
+  },
   title: String,
   level: Number,
   // для кого
-  forWhom: String,
+  forWhom: Array,
   // чого навчишся
-  willLearn: String,
+  willLearn: Array,
   // чого навчишся
-  willGet: String,
+  willGet: Array,
   content: String,
   imgUrl: {
     type: String,

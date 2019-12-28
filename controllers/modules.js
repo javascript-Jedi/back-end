@@ -3,14 +3,21 @@ const mongoose = require('mongoose')
 
 exports.all = (req, res) => {
   moduleSchema.find({})
-    .then( data => {
-      res.send(data)
-    })
-    .catch( err => console.log(err))
+  .populate('lessons')
+  .exec((err, doc)=> {
+    if (err) {
+      console.log(err)
+      return res.sendStatus(500)
+    }
+    res.send(doc)
+  })
 }
 
 exports.moduleById = (req, res) => {
-  moduleSchema.findById(req.params.id, (err, doc) => {
+  moduleSchema
+  .findById(req.params.id)
+  .populate('lessons')
+  .exec((err, doc)=> {
     if (err) {
       console.log(err)
       return res.sendStatus(500)

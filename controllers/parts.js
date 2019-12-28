@@ -2,15 +2,22 @@ const partSchema = require('../models/partSchema')
 const mongoose = require('mongoose') 
 
 exports.all = (req, res) => {
-  partSchema.find({})
-    .then( data => {
-      res.send(data)
-    })
-    .catch( err => console.log(err))
+  partSchema
+  .find({})
+  .populate('exercise')
+  .exec((err, doc)=> {
+    if (err) {
+      console.log(err)
+      return res.sendStatus(500)
+    }
+    res.send(doc)
+  })
 }
 
 exports.partById = (req, res) => {
-  partSchema.findById(req.params.id, (err, doc) => {
+  partSchema.findById(req.params.id)
+  .populate('exercise')
+  .exec((err, doc)=> {
     if (err) {
       console.log(err)
       return res.sendStatus(500)
